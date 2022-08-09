@@ -1,15 +1,26 @@
 import logo from './logo.svg';
 import './App.css';
 import { useState } from 'react';
+import { useEffect } from 'react';
 
 function App() {
-  const friends = ['Rasel', 'Robin', ' Rafi'];
+  const [friends, setFriends] = useState([])
+  useEffect(()=>{
+   fetch('https://jsonplaceholder.typicode.com/users')
+   .then(res => res.json())
+  //  .then(data => setFriends(data))
+  }, [])
+
+  //  const friends = ['Rasel', 'Robin', ' Rafi'];
   const jobs = ['work at google', 'work at yt'];
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <MovieCounter></MovieCounter>
+        {
+          friends.map(friend => <li>{friend}</li>)
+        }
         
         <Friends name = {friends[0]} job = {jobs[1]}></Friends>
         <Friends name = "Nafiz khan" job = "work in BAT" place ="junior excutive"></Friends>
